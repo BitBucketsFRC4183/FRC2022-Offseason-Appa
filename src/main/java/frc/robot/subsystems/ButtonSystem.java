@@ -20,4 +20,11 @@ public class ButtonSystem {
         return joystick.getRawButtonPressed(XboxController.Button.kX.value);
     }
 
+
+    public boolean isShootPressed()
+    {
+        return joystick.getRawButtonPressed(XboxController.Button.kA.value);
+    }
+
+
 }
