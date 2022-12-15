@@ -3,10 +3,9 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.controls.PneumaticsContols;
 
 public class PneumaticsSystem extends SubsystemBase{
-
-    final ButtonSystem buttonSystem;
 
     DoubleSolenoid climber = new DoubleSolenoid(PneumaticsModuleType.REVPH,  3, 2);
     DoubleSolenoid intake = new DoubleSolenoid(PneumaticsModuleType.REVPH, 0, 1);
@@ -14,8 +13,10 @@ public class PneumaticsSystem extends SubsystemBase{
     boolean toggleClimber = false;
     boolean toggleIntake = false;
 
-    public PneumaticsSystem(ButtonSystem buttonSystem) {
-        this.buttonSystem = buttonSystem;
+    final PneumaticsContols pneumaticsControls;
+
+    public PneumaticsSystem(PneumaticsContols pneumaticsControls) {
+        this.pneumaticsControls = pneumaticsControls;
     }
 
     public void openClimber()
@@ -36,7 +37,7 @@ public class PneumaticsSystem extends SubsystemBase{
     public void periodic(){
 
         // Toggles climber between on/off when Y is pressed
-        if (buttonSystem.isClimberPressed())
+        if (pneumaticsControls.isClimberPressed())
         {
             toggleClimber = !toggleClimber;
         }
@@ -51,7 +52,7 @@ public class PneumaticsSystem extends SubsystemBase{
         }
 
         // Toggles climber between on/off when X is pressed
-        if (buttonSystem.isIntakePressed())
+        if (pneumaticsControls.isIntakePressed())
         {
             toggleIntake = !toggleIntake;
         }

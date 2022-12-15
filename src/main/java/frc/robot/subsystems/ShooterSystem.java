@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMaxLowLevel;
 
 import com.revrobotics.CANSparkMax;
+import frc.robot.controls.ShooterControls;
 
 
 public class ShooterSystem {
@@ -10,20 +11,18 @@ public class ShooterSystem {
 
     public boolean shoot = false;
 
-    final ButtonSystem buttonSystem;
-
-
+    final ShooterControls shooterButtons;
 
     CANSparkMax topMotor = new CANSparkMax(0, CANSparkMaxLowLevel.MotorType.kBrushless);
     CANSparkMax bottomMotor = new CANSparkMax(1, CANSparkMaxLowLevel.MotorType.kBrushless);
 
-    public ShooterSystem(ButtonSystem buttonSystem) {
-        this.buttonSystem = buttonSystem;
+    public ShooterSystem(ShooterControls shooterButtons) {
+        this.shooterButtons = shooterButtons;
     }
 
     public void periodic(){
 
-        if (buttonSystem.isShootPressed())
+        if (shooterButtons.isShootPressed())
         {
             shoot = !shoot;
         }
@@ -36,16 +35,16 @@ public class ShooterSystem {
         else {
             turnOffAll();
         }
-        }
+    }
 
     public void turnOffAll()
     {
         topMotor.set(0);
         bottomMotor.set(0);
     }
-        public void shoot()
-        {
-            topMotor.set(.8);
-            bottomMotor.set(.65);
-        }
+    public void shoot()
+    {
+        topMotor.set(.8);
+        bottomMotor.set(.65);
+    }
 }

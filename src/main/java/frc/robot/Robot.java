@@ -6,10 +6,13 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.subsystems.ButtonSystem;
+import frc.robot.controls.PneumaticsContols;
+import frc.robot.controls.ShooterControls;
+import frc.robot.controls.SwerveControls;
 import frc.robot.subsystems.PneumaticsSystem;
+import frc.robot.subsystems.ShooterSystem;
+import frc.robot.subsystems.SwerveDrive;
 
 
 /**
@@ -21,8 +24,15 @@ import frc.robot.subsystems.PneumaticsSystem;
 public class Robot extends TimedRobot
 {
 
-    ButtonSystem buttonSystem = new ButtonSystem();
-    PneumaticsSystem pneumaticsSystem = new PneumaticsSystem(buttonSystem);
+    PneumaticsContols pneumaticsControls = new PneumaticsContols();
+    ShooterControls shooterControls = new ShooterControls();
+    SwerveControls swerveControls = new SwerveControls();
+
+    PneumaticsSystem pneumaticsSystem = new PneumaticsSystem(pneumaticsControls);
+    ShooterSystem shooterSystem = new ShooterSystem(shooterControls);
+    SwerveDrive swerveDrive = new SwerveDrive(swerveControls);
+
+
     
     /**
      * This method is run when the robot is first started up and should be used for any
@@ -63,6 +73,8 @@ public class Robot extends TimedRobot
     public void teleopPeriodic() {
 
         pneumaticsSystem.periodic();
+        shooterSystem.periodic();
+        swerveDrive.periodic();
 
     }
 

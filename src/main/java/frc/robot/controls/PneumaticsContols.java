@@ -1,14 +1,13 @@
-package frc.robot.subsystems;
-
+package frc.robot.controls;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 
-public class ButtonSystem {
+public class PneumaticsContols {
 
     Joystick joystick = new Joystick(0);
 
-    // Hold Y to activate piston
+    // Press Y to toggle piston between on and off state
     public boolean isClimberPressed()
     {
         return joystick.getRawButtonPressed(XboxController.Button.kY.value);
@@ -19,12 +18,5 @@ public class ButtonSystem {
     {
         return joystick.getRawButtonPressed(XboxController.Button.kX.value);
     }
-
-
-    public boolean isShootPressed()
-    {
-        return joystick.getRawButtonPressed(XboxController.Button.kA.value);
-    }
-
 
 }
